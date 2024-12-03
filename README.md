@@ -1,0 +1,329 @@
+Project Documentation
+
+# Package Management System
+
+## Description
+
+This project is a GraphQL-based API using Apollo Server and Express, with a focus on package management and user authentication. It includes functionality for user registration, login, package management (create, update, delete, retrieve), and supports JWT-based authentication.
+
+- - -
+
+## Table of Contents
+
+1.  [Project Setup](#project-setup)
+2.  [Environment Variables](#environment-variables)
+3.  [GraphQL API](#graphql-api)
+
+*   [Queries](#queries)
+*   [Mutations](#mutations)
+
+5.  [Running the Application Locally](#running-the-application-locally)
+6.  [Testing](#testing)
+
+
+- - -
+
+## Project Setup
+
+To set up the project locally, follow these steps:
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/Marrwan/package_management.git
+cd package_management
+```
+
+### 2. Install dependencies
+
+Ensure that you have Node.js and npm or yarn installed. You can check if they are installed by running:
+
+```
+node -v
+npm -v
+```
+
+If they are not installed, download and install them from Node.js.
+
+Install the required dependencies:
+
+```
+npm install
+```
+
+
+
+### 3\. Set up environment variables
+
+Create a .env file in the root directory of the project, and set up the required environment variables as listed below.
+
+## Environment Variables
+
+The project uses several environment variables to manage configurations like database connection, JWT secrets, and more. Here are the environment variables required for local development:
+
+#### Required Environment Variables:
+
+*   **JWT\_SECRET**: The secret key used to sign JWT tokens.
+*    **MONGO_URI** : The mongodb connection string
+*    **PORT** : The Application port
+*    **NODE_ENV** : The nodejs Environment
+
+#### Example .env file:
+
+```
+MONGO_URI=mongodb://localhost:27017/package-management-system
+PORT=3000
+JWT_SECRET="NotreallyATop$SECRET"
+NODE_ENV='development'
+```
+
+Make sure to replace the placeholder values with your actual database details.
+
+## Running the Application Locally
+
+After setting up the environment variables, follow these steps to run the application locally:
+
+Start the application:
+
+```
+npm run dev
+```
+
+This will start the Apollo Server and your API will be accessible at [http://localhost:4000/graphql](http://localhost:4000/graphql).
+
+## GraphQL API
+
+The API exposes several queries and mutations to interact with the data. Below are examples of how to use them.
+
+### Queries
+
+#### 1\. Get All Packages
+
+This query returns a list of all available packages.
+
+```
+query {
+getPackages {
+id
+name
+description
+price
+expirationDate
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"getPackages": [
+{
+"id": "1",
+"name": "Basic Package",
+"description": "Access to basic features",
+"price": 9.99,
+"expirationDate": "2024-12-31"
+},
+{
+"id": "2",
+"name": "Premium Package",
+"description": "Access to all features",
+"price": 19.99,
+"expirationDate": "2024-12-31"
+}
+]
+}
+}
+```
+
+#### 2\. Get Package by ID
+
+Fetch details of a specific package by providing its ID.
+
+```
+query {
+getPackageById(id: "1") {
+id
+name
+description
+price
+expirationDate
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"getPackageById": {
+"id": "1",
+"name": "Basic Package",
+"description": "Access to basic features",
+"price": 9.99,
+"expirationDate": "2024-12-31"
+}
+}
+}
+```
+
+### Mutations
+
+#### 1\. Register User
+
+This mutation allows a new user to register by providing their name, email, and password.
+
+```
+mutation {
+register(name: "John Doe", email: "john.doe@example.com", password: "Password123") {
+token
+user {
+id
+name
+email
+}
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"register": {
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+"user": {
+"id": "1",
+"name": "John Doe",
+"email": "john.doe@example.com"
+}
+}
+}
+}
+```
+
+#### 2\. Login User
+
+This mutation allows a registered user to log in by providing their email and password.
+
+```
+mutation {
+login(email: "john.doe@example.com", password: "Password123") {
+token
+user {
+id
+name
+email
+}
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"login": {
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+"user": {
+"id": "1",
+"name": "John Doe",
+"email": "john.doe@example.com"
+}
+}
+}
+}
+```
+
+#### 3\. Create Package
+
+This mutation allows an admin to create a new package.
+
+```
+mutation {
+createPackage(name: "Advanced Package", description: "For power users", price: 29.99, expirationDate: "2025-12-31") {
+id
+name
+description
+price
+expirationDate
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"createPackage": {
+"id": "3",
+"name": "Advanced Package",
+"description": "For power users",
+"price": 29.99,
+"expirationDate": "2025-12-31"
+}
+}
+}
+```
+
+#### 4\. Update Package
+
+This mutation allows an admin to update an existing package.
+
+```
+mutation {
+updatePackage(id: "1", name: "Updated Package", price: 12.99) {
+id
+name
+description
+price
+expirationDate
+}
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"updatePackage": {
+"id": "1",
+"name": "Updated Package",
+"description": "Access to basic features",
+"price": 12.99,
+"expirationDate": "2024-12-31"
+}
+}
+}
+```
+
+#### 5\. Delete Package
+
+This mutation allows an admin to delete a package by ID.
+
+```
+mutation {
+deletePackage(id: "3")
+}
+```
+
+Response:
+
+```
+{
+"data": {
+"deletePackage": true
+}
+}
+```
+
+## Testing
+
+To test the GraphQL API, you can use GraphQL playground, Postman, or any GraphQL client. Ensure your server is running locally before making the requests.
