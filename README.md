@@ -77,7 +77,7 @@ JWT_SECRET="NotreallyATop$SECRET"
 NODE_ENV='development'
 ```
 
-Make sure to replace the placeholder values with your actual database details.
+Make sure to replace with your actual database details.
 
 ## Running the Application Locally
 
@@ -89,7 +89,7 @@ Start the application:
 npm run dev
 ```
 
-This will start the Apollo Server and your API will be accessible at [http://localhost:4000/graphql](http://localhost:4000/graphql).
+This will start the Apollo Server and your API will be accessible at [http://localhost:4000/graphql](http://localhost:4000/graphql) or the port you set.
 
 ## GraphQL API
 
@@ -101,7 +101,7 @@ The API exposes several queries and mutations to interact with the data. Below a
 
 This query returns a list of all available packages.
 
-```
+```shell
 query {
 getPackages {
 id
@@ -113,21 +113,21 @@ expirationDate
 }
 ```
 
-Response:
+ Example Response:
 
-```
+```json
 {
 "data": {
 "getPackages": [
 {
-"id": "1",
+"id": "674f5ee32ebf53b24ed68727",
 "name": "Basic Package",
 "description": "Access to basic features",
 "price": 9.99,
 "expirationDate": "2024-12-31"
 },
 {
-"id": "2",
+"id": "890f5ee32ebf53b24ed68727",
 "name": "Premium Package",
 "description": "Access to all features",
 "price": 19.99,
@@ -154,9 +154,9 @@ expirationDate
 }
 ```
 
-Response:
+Example Response:
 
-```
+```json
 {
 "data": {
 "getPackageById": {
@@ -189,9 +189,9 @@ email
 }
 ```
 
-Response:
+Example Response:
 
-```
+```json
 {
 "data": {
 "register": {
@@ -223,9 +223,9 @@ email
 }
 ```
 
-Response:
+Example Response:
 
-```
+```json
 {
 "data": {
 "login": {
@@ -258,7 +258,7 @@ expirationDate
 
 Response:
 
-```
+```json
 {
 "data": {
 "createPackage": {
@@ -290,7 +290,7 @@ expirationDate
 
 Response:
 
-```
+```json
 {
 "data": {
 "updatePackage": {
@@ -316,7 +316,7 @@ deletePackage(id: "3")
 
 Response:
 
-```
+```json
 {
 "data": {
 "deletePackage": true

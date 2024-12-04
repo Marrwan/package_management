@@ -34,7 +34,7 @@ const server = new ApolloServer(
 server.start().then(() => {
   server.applyMiddleware({ app });
   const baseUrl = ENV === 'production'
-      ? `https://${process.env.HOST || 'your-production-domain.com'}`
+      ? `https://${process.env.HOST}`
       : `http://localhost:${PORT}`;
 
   console.log(`GraphQL API available at ${baseUrl}${server.graphqlPath}`);

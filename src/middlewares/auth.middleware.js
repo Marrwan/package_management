@@ -25,7 +25,6 @@ const authenticate = async (context) => {
 const authorize = (role) => {
     return (context) => {
         const user = context.user;
-        console.log({user})
         if (user.role !== role) {
             throw new Error("Forbidden: Insufficient permissions");
         }
