@@ -437,6 +437,38 @@ Example response:
 }
 ```
 
+#### 7. Switch role(with userId)
+
+```shell
+mutation DeletePackage3 {
+    switchRole(newRole: "user", userId: "674ff3a2a161d8478fa79aa2") {
+        id
+        name
+        email
+        role
+        createdAt
+        updatedAt
+    }
+}
+```
+
+Example response:
+
+```json
+{
+  "data": {
+    "switchRole": {
+      "id": "674ff3a2a161d8478fa79aa2",
+      "name": "Abdulbasit",
+      "email": "abdul20191@mail.com",
+      "role": "user",
+      "createdAt": "1733292962680",
+      "updatedAt": "1733295838540"
+    }
+  }
+}
+```
+
 ## Testing
 
 To test the GraphQL API, you can use GraphQL playground, Postman, or any GraphQL client. Ensure your server is running locally before making the requests.
