@@ -4,35 +4,59 @@ const { generateToken } = require('../utils/jwt.utils');
 
 const authService = {
     async register({ name, email, password }) {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            throw new Error('Email already in use.');
+        try {
+            const existingUser = await User.findOne({email});
+            if (existingUser) {
+                throw new Error('Email already in use.');
+            }
+
+            const hashedPassword = await hashPassword(password);
+            const newUser = new User({name, email, password: hashedPassword});
+            await newUser.save();
+
+            const access_token = await generateToken(newUser);
+
+            return {access_token, user: newUser};
+        }catch(err) {
+            throw new Error("Something went wrong, please try again later.");
         }
-
-        const hashedPassword = await hashPassword(password);
-        const newUser = new User({ name, email, password: hashedPassword });
-        await newUser.save();
-
-        const token = await generateToken(newUser);
-
-        return { token, user: newUser };
     },
 
     async login({ email, password }) {
-        const user = await User.findOne({ email });
-        if (!user) {
-            throw new Error('User not found.');
+        try {
+            const user = await User.findOne({email});
+            if (!user) {
+                throw new Error('User not found.');
+            }
+
+            const isMatch = await user.comparePassword(password);
+            if (!isMatch) {
+                throw new Error('Invalid credentials.');
+            }
+
+            const access_token = user.generateToken();
+
+            return {access_token, user};
+        }catch (e) {
+            console.error({e});
+            throw new Error("Something went wrong, please try again later.");
         }
-
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
-            throw new Error('Invalid credentials.');
-        }
-
-        const token = user.generateToken();
-
-        return { token, user };
     },
+
+    async switchRole({userId, newRole}){
+            const user = await User.findById(userId);
+            if (!user) {
+                throw new Error(`User with ID ${userId} not found`);
+            }
+
+            if (user.role === newRole) {
+                return user;
+            }
+
+            user.role = newRole;
+            await user.save();
+            return user;
+    }
 };
 
 module.exports = authService;

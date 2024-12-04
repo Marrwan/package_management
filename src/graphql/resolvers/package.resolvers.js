@@ -1,6 +1,6 @@
 const packageService = require("../../services/package.service");
-const { authenticate, authorize } = require("../../middlewares/auth.middleware");
 const { Types } = require("mongoose");
+const {handleAuth} = require("../../middlewares/auth.middleware");
 
 const validateObjectId = (id, entityName = "package") => {
     if (!Types.ObjectId.isValid(id)) {
@@ -8,12 +8,7 @@ const validateObjectId = (id, entityName = "package") => {
     }
 };
 
-const handleAuth = async (context, role = null) => {
-    await authenticate(context);
-    if (role) {
-        await authorize(role)(context);
-    }
-};
+
 
 const packageResolvers = {
     Query: {

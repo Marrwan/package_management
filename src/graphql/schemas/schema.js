@@ -23,7 +23,7 @@ const typeDefs = gql`
     }
 
     type AuthPayload {
-        token: String!
+        access_token: String!
         user: User!
     }
 
@@ -47,6 +47,7 @@ const typeDefs = gql`
         createPackage(name: String!, description: String!, price: Float!, expirationDate: String!): Package
         updatePackage(id: ID!, name: String, description: String, price: Float): Package
         deletePackage(id: ID!): Boolean
+        switchRole(userId: ID, newRole: String!): User
     }
 `;
 

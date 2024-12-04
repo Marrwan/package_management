@@ -223,33 +223,44 @@ Examples Response:
 
 This mutation allows a new user to register by providing their name, email, and password.
 
-```
-mutation {
-register(name: "John Doe", email: "john.doe@example.com", password: "Password123") {
-token
-user {
-id
-name
-email
+```shell
+mutation Register {
+    register(
+        name: "Abdulbasit"
+        email: "abdul20191@mail.com"
+        password: "Qwerty@12345?"
+    ) {
+        token
+        user {
+            id
+            name
+            email
+            role
+            createdAt
+            updatedAt
+        }
+    }
 }
-}
-}
+
 ```
 
 Example Response:
 
 ```json
 {
-"data": {
-"register": {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-"user": {
-"id": "1",
-"name": "John Doe",
-"email": "john.doe@example.com"
-}
-}
-}
+  "data": {
+    "register": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGZmM2EyYTE2MWQ4NDc4ZmE3OWFhMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMjkyOTYyLCJleHAiOjE3MzMzNzkzNjJ9.aQY5AG9O4_qlTei4kyFm1zC4t_TQ5Ia_Ng4auHK-Qto",
+      "user": {
+        "id": "674ff3a2a161d8478fa79aa2",
+        "name": "Abdulbasit",
+        "email": "abdul20191@mail.com",
+        "role": "user",
+        "createdAt": "1733292962680",
+        "updatedAt": "1733292962680"
+      }
+    }
+  }
 }
 ```
 
@@ -257,33 +268,41 @@ Example Response:
 
 This mutation allows a registered user to log in by providing their email and password.
 
-```
-mutation {
-login(email: "john.doe@example.com", password: "Password123") {
-token
-user {
-id
-name
-email
+```shell
+mutation Register {
+    login(email: "abdul20191@mail.com", password: "Qwerty@12345?") {
+        user {
+            id
+            name
+            email
+            role
+            createdAt
+            updatedAt
+        }
+        access_token
+    }
 }
-}
-}
+
+
 ```
 
 Example Response:
 
 ```json
 {
-"data": {
-"login": {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-"user": {
-"id": "1",
-"name": "John Doe",
-"email": "john.doe@example.com"
-}
-}
-}
+  "data": {
+    "login": {
+      "user": {
+        "id": "674ff3a2a161d8478fa79aa2",
+        "name": "Abdulbasit",
+        "email": "abdul20191@mail.com",
+        "role": "user",
+        "createdAt": "1733292962680",
+        "updatedAt": "1733292962680"
+      },
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGZmM2EyYTE2MWQ4NDc4ZmE3OWFhMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMjk0OTU2LCJleHAiOjE3MzMzODEzNTZ9.w8vU9BJ-vRu6aoOnNqbOB1YNVhpnCoC_qJRV5LGb1z8"
+    }
+  }
 }
 ```
 

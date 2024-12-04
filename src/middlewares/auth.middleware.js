@@ -31,4 +31,11 @@ const authorize = (role) => {
     };
 };
 
-module.exports = { authenticate, authorize };
+const handleAuth = async (context, role = null) => {
+    await authenticate(context);
+    if (role) {
+        await authorize(role)(context);
+    }
+};
+
+module.exports = { authenticate, authorize, handleAuth };

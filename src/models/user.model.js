@@ -13,7 +13,9 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.methods.hashPassword = hashPassword;
-userSchema.methods.comparePassword = comparePassword;
+userSchema.methods.comparePassword = function (password){
+    return comparePassword(password, this.password);
+};
 userSchema.methods.generateToken = function () {
     return generateToken(this);
 };
