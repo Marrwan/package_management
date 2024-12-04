@@ -308,65 +308,80 @@ Example Response:
 
 #### 3\. Create Package
 
-This mutation allows an admin to create a new package.
+This mutation allows an admin to create a new package (must be logged in).
 
-```
-mutation {
-createPackage(name: "Advanced Package", description: "For power users", price: 29.99, expirationDate: "2025-12-31") {
-id
-name
-description
-price
-expirationDate
+```shell
+mutation CreatePackage {
+    createPackage(
+        name: "Another packahe"
+        description: "hjkgnksugku"
+        price: 23
+        expirationDate: "2024"
+    ) {
+        id
+        name
+        description
+        price
+        expirationDate
+        createdAt
+        updatedAt
+    }
 }
-}
+
 ```
 
 Response:
 
 ```json
 {
-"data": {
-"createPackage": {
-"id": "3",
-"name": "Advanced Package",
-"description": "For power users",
-"price": 29.99,
-"expirationDate": "2025-12-31"
-}
-}
+  "data": {
+    "createPackage": {
+      "id": "674ffc8d43c672174b27c8b6",
+      "name": "Another packahe",
+      "description": "hjkgnksugku",
+      "price": 23,
+      "expirationDate": "1704067200000",
+      "createdAt": "1733295245373",
+      "updatedAt": "1733295245373"
+    }
+  }
 }
 ```
 
 #### 4\. Update Package
 
-This mutation allows an admin to update an existing package.
+This mutation allows an admin to update an existing package (admin).
 
-```
-mutation {
-updatePackage(id: "1", name: "Updated Package", price: 12.99) {
-id
-name
-description
-price
-expirationDate
+```shell
+mutation UpdatePackage {
+    updatePackage(id: "674ffc8d43c672174b27c8b6", name: "Changed P") {
+        id
+        name
+        description
+        price
+        expirationDate
+        createdAt
+        updatedAt
+    }
 }
-}
+
 ```
 
 Response:
 
 ```json
 {
-"data": {
-"updatePackage": {
-"id": "1",
-"name": "Updated Package",
-"description": "Access to basic features",
-"price": 12.99,
-"expirationDate": "2024-12-31"
-}
-}
+  "data": {
+    "updatePackage": {
+      "id": "674ffc8d43c672174b27c8b6",
+      "name": "Changed P",
+      "description": "hjkgnksugku",
+      "price": 23,
+      "expirationDate": "1704067200000",
+      "createdAt": "1733295245373",
+      "updatedAt": "1733295370024"
+    }
+  }
 }
 ```
 
@@ -374,9 +389,9 @@ Response:
 
 This mutation allows an admin to delete a package by ID.
 
-```
-mutation {
-deletePackage(id: "3")
+```shell
+mutation DeletePackage3 {
+    deletePackage(id: "674ffc8d43c672174b27c8b6")
 }
 ```
 
@@ -384,9 +399,41 @@ Response:
 
 ```json
 {
-"data": {
-"deletePackage": true
+  "data": {
+    "deletePackage": "Package successfully deleted"
+  }
 }
+```
+
+#### 6. Switch role(without supplying userId)
+
+```shell
+mutation DeletePackage3 {
+    switchRole(newRole: "admin") {
+        id
+        name
+        email
+        role
+        createdAt
+        updatedAt
+    }
+}
+```
+
+Example response:
+
+```json
+{
+    "data": {
+        "switchRole": {
+            "id": "674ff3a2a161d8478fa79aa2",
+            "name": "Abdulbasit",
+            "email": "abdul20191@mail.com",
+            "role": "admin",
+            "createdAt": "1733292962680",
+            "updatedAt": "1733295352495"
+        }
+    }
 }
 ```
 

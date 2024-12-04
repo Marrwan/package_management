@@ -46,7 +46,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): AuthPayload
         createPackage(name: String!, description: String!, price: Float!, expirationDate: String!): Package
         updatePackage(id: ID!, name: String, description: String, price: Float): Package
-        deletePackage(id: ID!): Boolean
+        deletePackage(id: ID!): String
         switchRole(userId: ID, newRole: String!): User
     }
 `;

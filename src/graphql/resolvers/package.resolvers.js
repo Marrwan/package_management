@@ -54,7 +54,8 @@ const packageResolvers = {
         deletePackage: async (_, { id }, context) => {
             await handleAuth(context, "admin");
             validateObjectId(id, "package");
-            return await packageService.deletePackage(id);
+            await packageService.deletePackage(id);
+            return "Package successfully deleted"
         },
     },
 };
