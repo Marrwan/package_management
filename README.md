@@ -102,71 +102,118 @@ The API exposes several queries and mutations to interact with the data. Below a
 This query returns a list of all available packages.
 
 ```shell
-query {
-getPackages {
-id
-name
-description
-price
-expirationDate
+query GetPackages {
+    getPackages {
+        id
+        name
+        description
+        price
+        expirationDate
+        createdAt
+        updatedAt
+    }
 }
-}
+
 ```
 
  Example Response:
 
 ```json
 {
-"data": {
-"getPackages": [
-{
-"id": "674f5ee32ebf53b24ed68727",
-"name": "Basic Package",
-"description": "Access to basic features",
-"price": 9.99,
-"expirationDate": "2024-12-31"
-},
-{
-"id": "890f5ee32ebf53b24ed68727",
-"name": "Premium Package",
-"description": "Access to all features",
-"price": 19.99,
-"expirationDate": "2024-12-31"
-}
-]
-}
+    "data": {
+        "getPackages": [
+            {
+                "id": "674f5ee32ebf53b24ed68727",
+                "name": "Popp",
+                "description": "Nothing really much",
+                "price": 45.9,
+                "expirationDate": "1726099200000",
+                "createdAt": "1733254883783",
+                "updatedAt": "1733254883783"
+            },
+            {
+                "id": "674f6e96ab306ad37a62a2bc",
+                "name": "Premium Package",
+                "description": "A premium package with extra features",
+                "price": 99.99,
+                "expirationDate": "1735603200000",
+                "createdAt": "1733258902701",
+                "updatedAt": "1733258902701"
+            }
+        ]
+    }
 }
 ```
-
 #### 2\. Get Package by ID
 
 Fetch details of a specific package by providing its ID.
 
-```
-query {
-getPackageById(id: "1") {
-id
-name
-description
-price
-expirationDate
+```shell
+query GetPackageById {
+    getPackageById(id: "674f5ee32ebf53b24ed68727") {
+        id
+        name
+        description
+        price
+        expirationDate
+        createdAt
+        updatedAt
+    }
 }
-}
+
 ```
 
 Example Response:
 
 ```json
 {
-"data": {
-"getPackageById": {
-"id": "1",
-"name": "Basic Package",
-"description": "Access to basic features",
-"price": 9.99,
-"expirationDate": "2024-12-31"
+  "data": {
+    "getPackageById": {
+      "id": "674f5ee32ebf53b24ed68727",
+      "name": "Popp",
+      "description": "Nothing really much",
+      "price": 45.9,
+      "expirationDate": "1726099200000",
+      "createdAt": "1733254883783",
+      "updatedAt": "1733254883783"
+    }
+  }
 }
+```
+### 3. Get Packages with filter(e.g name)
+
+```shell
+query GetPackages {
+    getPackages(name: "Pop") {
+        id
+        name
+        description
+        price
+        expirationDate
+        createdAt
+        updatedAt
+    }
 }
+
+```
+
+Examples Response:
+
+```json
+{
+    "data": {
+        "getPackages": [
+            {
+                "id": "674f5ee32ebf53b24ed68727",
+                "name": "Popp",
+                "description": "Nothing really much",
+                "price": 45.9,
+                "expirationDate": "1726099200000",
+                "createdAt": "1733254883783",
+                "updatedAt": "1733254883783"
+            }
+        ]
+    }
 }
 ```
 

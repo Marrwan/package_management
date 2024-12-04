@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+    scalar EmailAddress
+    
     type Package {
         id: ID!
         name: String!
@@ -40,7 +42,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        register(name: String!, email: String!, password: String!): AuthPayload
+        register(name: String!, email: EmailAddress!, password: String!): AuthPayload
         login(email: String!, password: String!): AuthPayload
         createPackage(name: String!, description: String!, price: Float!, expirationDate: String!): Package
         updatePackage(id: ID!, name: String, description: String, price: Float): Package
