@@ -26,6 +26,9 @@ const server = new ApolloServer(
             return { headers: req.headers };
         },
         formatError: (err) => {
+            if (err.message.includes("Expected value of type")) {
+                return new Error("One or more required fields are missing or invalid.");
+            }
             return err.message;
 
         },

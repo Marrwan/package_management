@@ -11,11 +11,19 @@ const packageService = {
     },
 
     async updatePackage(id, data) {
-        return await Package.findByIdAndUpdate(id, data, { new: true });
+        const updatedPackage = await Package.findByIdAndUpdate(id, data, { new: true });
+        if (!updatedPackage) {
+            throw new Error(`No package with ID ${id} found for update.`);
+        }
+        return updatedPackage;
     },
 
     async deletePackage(id) {
-        return await Package.findByIdAndDelete(id);
+        const deletedPackage = await Package.findByIdAndDelete(id);
+        if (!deletedPackage) {
+            throw new Error(`No package with ID ${id} found for deletion.`);
+        }
+        return deletedPackage;
     },
 
     async getPackageById(id) {

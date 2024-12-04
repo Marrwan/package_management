@@ -25,8 +25,17 @@ const typeDefs = gql`
         user: User!
     }
 
+    input PriceRangeInput {
+        min: Float
+        max: Float
+    }
+
     type Query {
-        getPackages: [Package]
+        getPackages(
+            name: String,
+            expirationDate: String,
+            priceRange: PriceRangeInput
+        ): [Package]
         getPackageById(id: ID!): Package
     }
 
