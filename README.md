@@ -17,8 +17,8 @@ This project is a GraphQL-based API using Apollo Server and Express, with a focu
 *   [Queries](#queries)
 *   [Mutations](#mutations)
 
-5.  [Running the Application Locally](#running-the-application-locally)
-6.  [Testing](#testing)
+4.  [Running the Application Locally](#running-the-application-locally)
+5.  [Testing](#testing)
 
 
 - - -
